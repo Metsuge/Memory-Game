@@ -1,1 +1,1 @@
-sdsgg
+Memory game for Kodinu challenge
