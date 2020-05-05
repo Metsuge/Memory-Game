@@ -23,8 +23,9 @@ function flipCard(){
     return;
   } 
     //this is second click
-    hasFlippedCard = false;
+    
     secondCard = this;
+
     checkForMatch();
 }
 
@@ -37,6 +38,8 @@ function checkForMatch(){
 function disableCards(){
   firstCard.removeEventListener('click', flipCard);
   secondCard.removeEventListener('click', flipCard);
+
+  resetBoard()
 }
 
 function unflipCards() {
@@ -45,10 +48,28 @@ function unflipCards() {
     firstCard.classList.remove('flip');
     secondCard.classList.remove('flip');
 
-    lockBoard = false; //after they flipped back, unlock board
+    resetBoard(); //after they flipped back, unlock board
   }, 1000);
   
 }
 
 
+function resetBoard(){
+  [hasFlippedCard, lockBoard] = [false, false];
+  [firstCard, secondCard] = [null, null];
+}
+
+(function shuffle(){
+  cards.forEach(card => {
+    let randomPos = Math.floor(Math.random()*12);
+    card.style.order = randomPos;
+  });
+})();
+
+
+
+
+
+
 cards.forEach(card => card.addEventListener('click', flipCard));
+
