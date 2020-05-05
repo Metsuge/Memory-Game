@@ -5,7 +5,14 @@ let lockBoard = false;
 let firstCard, secondCard;
 
 function flipCard(){
-  if (lockBoard) return; //if true, all stops, and the following code won't be executed 
+  if (lockBoard) return; //if true, all stops, you CAN'T flip cards
+  if (this === firstCard) return;
+  // jeigu paspaudi korta(this) ir this === firstCard, reiskia firstCard jau
+  // pries tai buvo priskirta kaip this ir tai yra antras paspaudimas, tai bus
+  // false ir eina zemyn i 22 eilute
+  //jeigu this !=== firstCard, reiskias firstCard nebuvo panaudota, reiskias tai yra pirmas 
+  //paspaudimas ir reikia ji issaugoti, eina normaliai prie f-jos eiluteje 11
+
   this.classList.add('flip');
 
   if(!hasFlippedCard){
@@ -33,12 +40,14 @@ function disableCards(){
 }
 
 function unflipCards() {
-  lockBoard = true;
-  setTimeout(() => {
+  lockBoard = true; //first lock board
+  setTimeout(() => { //the flip cards
     firstCard.classList.remove('flip');
     secondCard.classList.remove('flip');
+
+    lockBoard = false; //after they flipped back, unlock board
   }, 1000);
-  lockBoard = false;
+  
 }
 
 
