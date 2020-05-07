@@ -11,7 +11,7 @@ body{
 }
 
 .memory-game{
-    width: 640px;
+    width: 940px;
     height: 640px;
     display: flex;
     flex-wrap: wrap;
@@ -24,6 +24,7 @@ body{
     height: calc(33.333% - 10px);
     position: relative;
     margin:5px;
+
     transform: scale(1);
     transform-style: preserve-3d;
     transition: transform .5s;
@@ -51,4 +52,13 @@ body{
 
 .front-face{
     transform:rotateY(180deg);
+}
+
+/* .show4{
+    visibility: hidden;
+} */
+
+.button{
+    height: 50px;
+    margin: auto;
 }
