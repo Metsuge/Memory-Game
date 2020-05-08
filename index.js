@@ -3,10 +3,12 @@ const button = document.querySelector('.button');
 const buttonCheck = document.querySelector('.buttoncheck')
 
 
+
 let lockBoard = false;
 let randomListOfCards = [];
-// let listOfCardsClicked = [];
 let playerListOfCards = [];
+
+let score = 0;
 
 function makeRandomList(){ //nera pasikartojanciu kortu
   while (randomListOfCards.length < 3) {
@@ -18,18 +20,6 @@ function makeRandomList(){ //nera pasikartojanciu kortu
   }
 }
 
-
-// function flipCardsAuto(){
-//   lockBoard = true;
-//   // let cardFinishedFlipping = true;
-  
-//   for (i=0;i<randomListOfCards.length;i++){
-//     let aCard = randomListOfCards[i]
-//     setTimeout(()=>{
-//       console.log(aCard);
-//     }, 1000)
-    
-//   }
 
 function flipCardsAuto(i){
   let randomCard = randomListOfCards[i]
@@ -46,7 +36,6 @@ function flipCardsAuto(i){
     randomCard.classList.remove('flip')
     lockBoard = false;
   }, 2000); 
-  
 } 
   
 function generateRandomSequence(){
@@ -64,6 +53,7 @@ function generateRandomSequence(){
   cards.forEach(card => {
     let randomPos = Math.floor(Math.random()*8);
     card.style.order = randomPos;
+    document.getElementById("score").innerHTML = "score: " + score;
   });
 })();
 
@@ -73,38 +63,38 @@ function flipCard(){ //zaidejas flippina
   this.classList.add('flip'); 
   setTimeout(()=>{
     this.classList.remove('flip');
-   
     lockBoard = false;
   }, 1000)
 
   let playerCard = this;
 
   playerListOfCards.push(playerCard)
-  console.log("Player clicked this card: ");
-  
-  console.log(playerListOfCards);
-  
 }
 
 function checkAnswer(){
- console.log(playerListOfCards);
- 
-  for (i=0;i< playerListOfCards.length;i++){
+let answer = false;
+  for (i=0;i<randomListOfCards.length;i++){
+    let pcCard = randomListOfCards[i];
     let gamerCard = playerListOfCards[i]
+    if(pcCard.dataset.framework === gamerCard.dataset.framework){
+      answer = true
+    } 
+  }
 
+  if(answer){
+    score++;
+    console.log("Yssss ... Score: " + score);
+    document.getElementById("score").innerHTML = "score: " + score;
     
-      if(randomListOfCards.includes(gamerCard) ){
-        console.log("YES");
-        
-
-        
-      } else console.log(randomListOfCards);
-     
+  } else {
+    score--;
+    console.log("NNNNNo... Score: " + score);
+    document.getElementById("score").innerHTML = "score: " + score;
     
   }
-    
-  
+
   randomListOfCards=[];
+  playerListOfCards = [];
 }
 
 

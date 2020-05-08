@@ -21,7 +21,8 @@ body{
 
 .memory-card{
     width: calc(25% - 10px);
-    height: calc(33.333% - 10px);
+    /* height: calc(33.333% - 10px); */
+    height: auto;
     position: relative;
     margin:5px;
 
@@ -61,9 +62,15 @@ body{
 .button{
     height: 50px;
     margin: auto;
+    border: 1px solid white;
 }
 
 .buttoncheck{
     height: 50px;
     margin: auto;
+}
+
+#score{
+    border:1px solid white;
+    display: inline-table;
 }

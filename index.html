@@ -8,8 +8,8 @@
         <link rel='stylesheet' href='styles.css'> 
     </head>
     <body>
-        <section class="memory-game">
-
+        <h1 id="score"></h1>
+        <section class="memory-game">   
     
             <div class="memory-card" data-framework="aurelia">
                 <img class='front-face' src='./images/aurelia.svg' alt="Aurelia"/>
@@ -35,8 +35,6 @@
                 <img class='front-face' src='./images/ember.svg' alt="Ember"/>
                 <img class='back-face' src='./images/js-badge.svg' alt='JS Badge'/>
             </div> 
-    
-        
             <div class="memory-card" data-framework="angular">
                 <img class='front-face' src='./images/angular.svg' alt="Angular"/>
                 <img class='back-face' src='./images/js-badge.svg' alt='JS Badge'/>
@@ -47,8 +45,8 @@
             </div>
             
         </section>
-        <button class="button">Unflip</button>
-        <button class="buttoncheck">Check Answer</button>
+        <button type="button" class="button">Play</button>
+        <button type="button" class="buttoncheck">Check Answer</button>
         
 
 
