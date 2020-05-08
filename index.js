@@ -30,43 +30,29 @@ function makeRandomList(){ //nera pasikartojanciu kortu
 //     }, 1000)
     
 //   }
-let finished = false;
+
 function flipCardsAuto(i){
   let randomCard = randomListOfCards[i]
-
+  lockBoard = true;
   randomCard.classList.add('flip') 
   if (i<randomListOfCards.length){
     setTimeout(function(){
       i++; 
       flipCardsAuto(i);
-      finished = true;
     }, 500);    
-    
   }
+
   setTimeout(function(){
-  randomCard.classList.remove('flip')
-}, 2000); 
+    randomCard.classList.remove('flip')
+    lockBoard = false;
+  }, 2000); 
+  
 } 
-
-// function flipCardsAuto(){
-//   randomListOfCards.forEach(
-//     card => {
-
-//       card.classList.add('flip') 
-      
-//       setTimeout(()=>{
-//         card.classList.remove('flip');
-//         randomListOfCards=[];
-//         lockBoard = false;
-//       }, 1000) 
-//     }
-//   )
-// }
   
 function generateRandomSequence(){
   makeRandomList();
-  flipCardsAuto(0)
-}
+  flipCardsAuto(0);
+};
 
 // function disableCards(){
 //   firstCard.removeEventListener('click', flipCard);
@@ -78,42 +64,47 @@ function generateRandomSequence(){
   cards.forEach(card => {
     let randomPos = Math.floor(Math.random()*8);
     card.style.order = randomPos;
-
   });
 })();
 
-function flipCard(){ //zaidenas flippina
+function flipCard(){ //zaidejas flippina
   if(lockBoard) return; //jei lenta uzrakinta, nk negali spaust
 
   this.classList.add('flip'); 
   setTimeout(()=>{
     this.classList.remove('flip');
-    randomListOfCards=[];
+   
     lockBoard = false;
   }, 1000)
 
   let playerCard = this;
 
   playerListOfCards.push(playerCard)
+  console.log("Player clicked this card: ");
+  
   console.log(playerListOfCards);
   
 }
 
 function checkAnswer(){
+ console.log(playerListOfCards);
  
-  for (i=0;i< randomListOfCards.length;i++){
-    console.log(playerListOfCards[i]);
+  for (i=0;i< playerListOfCards.length;i++){
+    let gamerCard = playerListOfCards[i]
+
     
-      if(randomListOfCards.includes(playerListOfCards[i]) ){
-        console.log(playerListOfCards[i]);
+      if(randomListOfCards.includes(gamerCard) ){
+        console.log("YES");
         
-      } else console.log("no");
-      
+
+        
+      } else console.log(randomListOfCards);
+     
     
   }
     
   
-  
+  randomListOfCards=[];
 }
 
 
