@@ -8,7 +8,14 @@
         <link rel='stylesheet' href='styles.css'> 
     </head>
     <body>
-        <h1 id="score"></h1>
+        <div class="info_for_player">
+            <h1 id="score"></h1>
+            <p id='message'>Press Play</p>
+        </div>
+        <div class="buttons">
+            <button type="button" class="button play">Play</button>
+            <button type="button" class="button check">Check Answer</button>
+        </div>
         <section class="memory-game">   
     
             <div class="memory-card" data-framework="aurelia">
@@ -45,8 +52,6 @@
             </div>
             
         </section>
-        <button type="button" class="button">Play</button>
-        <button type="button" class="buttoncheck">Check Answer</button>
         
 
 

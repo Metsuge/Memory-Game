@@ -1,13 +1,13 @@
 const cards = document.querySelectorAll('.memory-card');
-const button = document.querySelector('.button');
-const buttonCheck = document.querySelector('.buttoncheck')
-
+const button = document.querySelector('.play');
+const buttonCheck = document.querySelector('.check')
+const messagePlay = document.getElementById('message');
 
 
 let lockBoard = false;
 let randomListOfCards = [];
 let playerListOfCards = [];
-
+let gameIsOn = false;
 let score = 0;
 
 function makeRandomList(){ //nera pasikartojanciu kortu
@@ -36,6 +36,7 @@ function flipCardsAuto(i){
     randomCard.classList.remove('flip')
     lockBoard = false;
   }, 2000); 
+  gameIsOn = true;
 } 
   
 function generateRandomSequence(){
@@ -51,9 +52,9 @@ function generateRandomSequence(){
 
 (function shuffle(){
   cards.forEach(card => {
-    let randomPos = Math.floor(Math.random()*8);
+    let randomPos = Math.floor(Math.random()*cards.length);
     card.style.order = randomPos;
-    document.getElementById("score").innerHTML = "score: " + score;
+    document.getElementById("score").innerHTML = "Score: " + score;
   });
 })();
 
@@ -72,7 +73,8 @@ function flipCard(){ //zaidejas flippina
 }
 
 function checkAnswer(){
-let answer = false;
+  if(!gameIsOn) return messagePlay.style.visibility = 'visible';
+  let answer = false;
   for (i=0;i<randomListOfCards.length;i++){
     let pcCard = randomListOfCards[i];
     let gamerCard = playerListOfCards[i]
@@ -83,14 +85,13 @@ let answer = false;
 
   if(answer){
     score++;
-    console.log("Yssss ... Score: " + score);
-    document.getElementById("score").innerHTML = "score: " + score;
+    document.getElementById("score").innerHTML = "Score: " + score;
     
   } else {
-    score--;
-    console.log("NNNNNo... Score: " + score);
-    document.getElementById("score").innerHTML = "score: " + score;
-    
+    if(score>0){
+      score--;
+    }
+    document.getElementById("score").innerHTML = "Score: " + score;
   }
 
   randomListOfCards=[];
