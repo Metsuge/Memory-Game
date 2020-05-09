@@ -67,7 +67,7 @@ body{
     transform:rotateY(180deg);
 }
 
-.button, .buttoncheck{
+.button {
     font-size: 17px;
     border-radius: 27px ;
     border: none;
@@ -84,14 +84,8 @@ body{
     transform: scale(.97);
 }
 
-.buttoncheck{
-    height: 50px;
-    margin: auto;
-}
-
 #score{
     display: inline-table;
     visibility: hidden;
-
 }
 
