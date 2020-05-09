@@ -1,14 +1,15 @@
 const cards = document.querySelectorAll('.memory-card');
 const button = document.querySelector('.play');
-const buttonCheck = document.querySelector('.check')
-const messagePlay = document.getElementById('message');
 
+const messagePlay = document.getElementById('score');
 
-let lockBoard = false;
+let lockBoard = true;
+
 let randomListOfCards = [];
 let playerListOfCards = [];
-let gameIsOn = false;
+
 let score = 0;
+let answer = false;
 
 function makeRandomList(){ //nera pasikartojanciu kortu
   while (randomListOfCards.length < 3) {
@@ -20,86 +21,133 @@ function makeRandomList(){ //nera pasikartojanciu kortu
   }
 }
 
+function flipCardsAuto(i){//press Play, random sequence is flipping
 
-function flipCardsAuto(i){
   let randomCard = randomListOfCards[i]
-  lockBoard = true;
+ 
+
   randomCard.classList.add('flip') 
   if (i<randomListOfCards.length){
     setTimeout(function(){
       i++; 
       flipCardsAuto(i);
-    }, 500);    
+    }, 500); 
+    setTimeout(() => {
+    randomCard.classList.remove('flip')
+    
+  }, 2000); 
+     
   }
 
-  setTimeout(function(){
-    randomCard.classList.remove('flip')
-    lockBoard = false;
-  }, 2000); 
-  gameIsOn = true;
-} 
+  lockBoard = false;
+ 
   
-function generateRandomSequence(){
+} 
+
+// function flipCardsBack() {
+//   playerListOfCards.forEach(card=>{
+//      card.classList.remove('flip');
+//      lockBoard = false;
+//      console.log("flip them back again");
+//   });
+ 
+//  }
+ 
+
+  
+function play(){
   makeRandomList();
   flipCardsAuto(0);
 };
-
-// function disableCards(){
-//   firstCard.removeEventListener('click', flipCard);
-//   secondCard.removeEventListener('click', flipCard);
-//   resetBoard()
-// }
 
 (function shuffle(){
   cards.forEach(card => {
     let randomPos = Math.floor(Math.random()*cards.length);
     card.style.order = randomPos;
-    document.getElementById("score").innerHTML = "Score: " + score;
+    // document.getElementById("score").innerHTML = "Score: " + score;
   });
 })();
 
-function flipCard(){ //zaidejas flippina
+function flipCard(){ //zaidejas flippina ir kai pasirenka 3 kortas is kart tikrina
+ 
   if(lockBoard) return; //jei lenta uzrakinta, nk negali spaust
-
+  
   this.classList.add('flip'); 
   setTimeout(()=>{
     this.classList.remove('flip');
-    lockBoard = false;
+    
   }, 1000)
 
+  
   let playerCard = this;
+  
+  playerListOfCards.push(playerCard);
 
-  playerListOfCards.push(playerCard)
+  
+
+  if(playerListOfCards.length === randomListOfCards.length){
+    checkAnswer();
+    
+  } 
+
 }
 
-function checkAnswer(){
-  if(!gameIsOn) return messagePlay.style.visibility = 'visible';
-  let answer = false;
+function resetAll(){
+
+  correctNrOfCards = 0;
+}
+
+
+function checkAnswer() {  
+  let correctNrOfCards = 0
   for (i=0;i<randomListOfCards.length;i++){
     let pcCard = randomListOfCards[i];
     let gamerCard = playerListOfCards[i]
     if(pcCard.dataset.framework === gamerCard.dataset.framework){
-      answer = true
-    } 
-  }
+      correctNrOfCards++;
+    }; 
+  };
+    
+      if(correctNrOfCards === randomListOfCards.length){
+        answer = true;
+        resetAll();
+      } else {
+        answer = false;
+      }
+      
+     
+ 
 
   if(answer){
     score++;
-    document.getElementById("score").innerHTML = "Score: " + score;
+    console.log(score);
     
-  } else {
+    //document.getElementById("message").innerHTML = "Score: " + score;
+    messagePlay.style.visibility = 'visible';
+    
+    
+  } else if (!answer){
     if(score>0){
       score--;
+      console.log(score);
+      
+      
     }
-    document.getElementById("score").innerHTML = "Score: " + score;
+    
+    //messagePlay.style.visibility = 'visible'
   }
+
+ 
+
+  document.getElementById("score").innerHTML = "Score: " + score;
 
   randomListOfCards=[];
   playerListOfCards = [];
 }
 
 
-buttonCheck.addEventListener('click', checkAnswer)
-button.addEventListener('click', generateRandomSequence);
+
+//buttonCheck.addEventListener('click', checkAnswer)
+button.addEventListener('click', play);
 cards.forEach(card => card.addEventListener('click', flipCard));
 

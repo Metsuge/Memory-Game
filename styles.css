@@ -12,6 +12,8 @@ body{
 
 .info_for_player{
     text-align: center;
+    font-size: 25px;
+    color: whitesmoke;
 
 }
 
@@ -89,12 +91,7 @@ body{
 
 #score{
     display: inline-table;
-    color: whitesmoke;
-}
-
-#message{
-    font-size: 25px;
-    color: whitesmoke;
     visibility: hidden;
 
 }
+
