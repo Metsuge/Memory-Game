@@ -8,7 +8,7 @@ let lockBoard = true;
 let randomListOfCards = [];
 let playerListOfCards = [];
 
-let score = 4;
+let score = 0;
 let answer = false;
 
 let cardNumber = 3;
