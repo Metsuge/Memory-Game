@@ -45,6 +45,7 @@ body{
     transform: scale(1);
     transform-style: preserve-3d;
     transition: transform .5s;
+    cursor: default;
 }
 
 .memory-card:active{
@@ -71,7 +72,7 @@ body{
     transform:rotateY(180deg);
 }
 
-.button {
+.button, .reset {
     font-size: 17px;
     border-radius: 27px ;
     border: none;
