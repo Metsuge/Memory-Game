@@ -1,3 +1,5 @@
+let level = 8;
+
 
 (function createDOMElements(i){//i = how many cards on screen
   let newCard = document.createElement('section')
@@ -24,7 +26,7 @@
     newCard.appendChild(memoryCard);
   }
   
-})(8)
+})(level)
 
 const cards = [...document.querySelectorAll(".memory-card")];
 const button = document.querySelector('.play');
@@ -39,6 +41,7 @@ let answer = false;
 let speedOfFlip = 400;
 let cardNumber = 3;
 let nrOfCardsFlipped = 0;
+
 
 
 function makeRandomList(){ //nera pasikartojanciu kortu
@@ -68,8 +71,6 @@ function flipCardsAuto(i){//press Play, random sequence is flipping
      nrOfCardsFlipped++;
   };
   
-  console.log(nrOfCardsFlipped);
-  
   if(nrOfCardsFlipped === randomListOfCards.length){
     setTimeout(function(){
 
@@ -82,8 +83,6 @@ function flipCardsAuto(i){//press Play, random sequence is flipping
   }
  
 };
-
-
 
 function play(){
   makeRandomList();
@@ -143,17 +142,29 @@ function checkAnswer() {
 
 function levelUp(){
   let currentScore = score;
-  if(score === 3){
-    cardNumber++;
-    speedOfFlip = speedOfFlip-50;
-    document.getElementById("level").innerHTML = "Level 2!";
-    currentScore++;
-  } else if(score === 5){
-    cardNumber++;
-    speedOfFlip = speedOfFlip+50;
-    level3.style.visibility = 'visible';
-  }
-
+  switch(score){
+    case 3:
+      cardNumber++;
+      speedOfFlip = speedOfFlip-50;
+      document.getElementById("level").innerHTML = "Level 2!";
+      currentScore++;
+      break;
+    case 5:
+      cardNumber++;
+      speedOfFlip = speedOfFlip+50;
+      level3.style.visibility = 'visible';
+      document.getElementById("level").innerHTML = "Level 3!";
+      break;
+    case 8:
+      cardNumber++;
+      speedOfFlip = speedOfFlip+50;
+      level3.style.visibility = 'visible';
+      document.getElementById("level").innerHTML = "Level 4!";
+      break;
+    case 9:
+      document.getElementById("level").innerHTML = "Winner!";
+      break;
+  };  
 };
 
 
