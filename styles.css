@@ -14,7 +14,7 @@ body{
     text-align: center;
     font-size: 25px;
     color: whitesmoke;
-
+    margin-top: 20px;
 }
 
 .buttons{
@@ -30,6 +30,10 @@ body{
     flex-wrap: wrap;
     margin:auto;
     perspective: 1000px;
+}
+
+.main{
+    width: 100%;
 }
 
 .memory-card{
@@ -88,4 +92,15 @@ body{
     display: inline-table;
     visibility: hidden;
 }
+.inline{
+    display: inline-flex;
+    margin-bottom: 30px;
+}
 
+#level, #score{
+    margin-right: 60px;
+}
+
+.level3{
+    visibility: hidden;
+}
