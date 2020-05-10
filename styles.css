@@ -104,3 +104,8 @@ body{
 .level3{
     visibility: hidden;
 }
+
+.hint{
+    font-size: 15px;
+    width: 150px;
+}

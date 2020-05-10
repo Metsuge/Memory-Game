@@ -1,9 +1,9 @@
-let level = 8;
+let cardOnScreen = 8;
 
 
-(function createDOMElements(i){//i = how many cards on screen
+(function createDOMElements(cardOnScreen){//i = how many cards on screen
   let newCard = document.createElement('section')
-  for(i=0;i<8;i++){
+  for(a=0;a<cardOnScreen;a++){
     
     let memoryCard = document.createElement('div');
     let cardImg = document.createElement('img');
@@ -26,7 +26,7 @@ let level = 8;
     newCard.appendChild(memoryCard);
   }
   
-})(level)
+})(cardOnScreen)
 
 const cards = [...document.querySelectorAll(".memory-card")];
 const button = document.querySelector('.play');
@@ -42,8 +42,6 @@ let speedOfFlip = 400;
 let cardNumber = 3;
 let nrOfCardsFlipped = 0;
 
-
-
 function makeRandomList(){ //nera pasikartojanciu kortu
   while (randomListOfCards.length < cardNumber) {
     let randomNr = Math.floor(Math.random() * cards.length);
@@ -54,15 +52,11 @@ function makeRandomList(){ //nera pasikartojanciu kortu
   };  
 };
 
-
-
-
 function flipCardsAuto(i){//press Play, random sequence is flipping
   let randomCard = randomListOfCards[i];
   randomCard.classList.add('flip') 
 
   if (i<randomListOfCards.length){
-
     setTimeout(function(){
       i++; 
       flipCardsAuto(i);
@@ -78,7 +72,6 @@ function flipCardsAuto(i){//press Play, random sequence is flipping
       card.classList.remove('flip') })
       lockBoard = false;
       nrOfCardsFlipped = 0;
-   
     }, 1000);
   }
  
@@ -88,8 +81,6 @@ function play(){
   makeRandomList();
   flipCardsAuto(0);
 };
-
-
 
 function flipCard(){ //zaidejas flippina ir kai pasirenka 3 kortas is kart tikrina
   if(lockBoard) return; //jei lenta uzrakinta, nk negali spaust
@@ -141,7 +132,6 @@ function checkAnswer() {
 }
 
 function levelUp(){
-  let currentScore = score;
   switch(score){
     case 3:
       cardNumber++;
@@ -162,11 +152,23 @@ function levelUp(){
       document.getElementById("level").innerHTML = "Level 4!";
       break;
     case 9:
-      document.getElementById("level").innerHTML = "Winner!";
+      cardNumber++;
+      level3.style.visibility = 'visible';
+      document.getElementById("level").innerHTML = "Level 5!";
+      console.log(cardNumber);
       break;
+    case 10:
+      cardNumber=8;
+      speedOfFlip = speedOfFlip+50;
+      level3.style.visibility = 'visible';
+      document.getElementById("level").innerHTML = "Final level!";
+      break;
+    case 11:
+      document.getElementById("level").innerHTML = "WINNER!";
+      button.removeEventListener('click', play);
+      lockBoard = true;
   };  
 };
-
 
 button.addEventListener('click', play);
 cards.forEach(card => card.addEventListener('click', flipCard));
