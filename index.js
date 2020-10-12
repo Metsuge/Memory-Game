@@ -89,8 +89,8 @@ function play(){
   flipCardsAuto(0);
 };
 
-function flipCard(){ //zaidejas flippina ir kai pasirenka 3 kortas is kart tikrina
-  if(lockBoard) return; //jei lenta uzrakinta, nk negali spaust
+function flipCard(){ //player is flippings cards, game checks if right when 3 cards are chosen
+  if(lockBoard) return; //if the board is locked no click avlb
   this.classList.add('flip');
 
   setTimeout(()=>{
